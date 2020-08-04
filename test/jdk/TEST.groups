@@ -171,7 +171,8 @@ jdk_stream = \
     java/util/stream
 
 jdk_math = \
-    java/math
+    java/math/BigInteger/PrimeTest.java
+#    java/math
 
 jdk_io = \
     java/io

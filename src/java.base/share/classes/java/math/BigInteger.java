@@ -3747,10 +3747,13 @@ public class BigInteger extends Number implements Comparable<BigInteger> {
      *         {@code false} if it's definitely composite.
      */
     public boolean isProbablePrime(int certainty) {
+	System.out.println("BigInteger.java isProbablePrime entry");
         if (certainty <= 0)
             return true;
         BigInteger w = this.abs();
-        if (w.equals(TWO))
+        System.out.printf("\nBigInteger.java isProbablePrime: %s\n",this.toString());
+        System.out.printf("\nBigInteger.java isProbablePrime abs: %s\n",w.toString());
+	if (w.equals(TWO))
             return true;
         if (!w.testBit(0) || w.equals(ONE))
             return false;

@@ -82,9 +82,14 @@ public class PrimeTest {
         boolean mersennePrimeTest = checkMersennePrimes(certainty);
         System.out.println("Mersenne test result: " + (mersennePrimeTest ? "SUCCESS" : "FAILURE"));
 
-        if (!primeTest || !nonPrimeTest || !mersennePrimeTest) {
+        //if (!primeTest || !nonPrimeTest || !mersennePrimeTest) {
+	if (!primeTest) {
             throw new Exception("PrimeTest FAILED!");
-        }
+        } else if (!nonPrimeTest) {
+	    throw new Exception("Non prime test FAILED!");
+	} else if (!mersennePrimeTest) {
+	    throw new Exception("Mersenne prime test FAILED!");
+	}
 
         System.out.println("PrimeTest succeeded!");
     }
@@ -222,7 +227,11 @@ public class PrimeTest {
         boolean result = true;
         for (int n : MERSENNE_EXPONENTS) {
             BigInteger mp = BigInteger.ONE.shiftLeft(n).subtract(BigInteger.ONE);
-            if (!mp.isProbablePrime(certainty)) {
+	    System.out.printf("\nBigInteger in PrimeTest.java(n = %d): %s\n",n,mp.toString());
+	    boolean result_mine = mp.isProbablePrime(certainty);
+	    System.out.printf("\nPrimeTest.java::checkMersennePrimes isProbablePrime(certainty): %s\n",Boolean.toString(result_mine));
+            if (!result_mine) {
+            // if (!mp.isProbablePrime(certainty)) {
                 System.err.println("Mp with p = "+n+" not classified as prime");
                 result = false;
             }
