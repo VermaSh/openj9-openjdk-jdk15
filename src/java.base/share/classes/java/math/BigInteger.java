@@ -3747,13 +3747,24 @@ public class BigInteger extends Number implements Comparable<BigInteger> {
      *         {@code false} if it's definitely composite.
      */
     public boolean isProbablePrime(int certainty) {
-	System.out.println("BigInteger.java isProbablePrime entry");
+        FileWriter myWriter = new FileWriter("/sandbox1/sverma/bigIntegerTest_primeTest/openjdk-tests/TKG/big_integer_out.txt", true);
+        BufferWriter bw = new BufferWritter(myWriter);
+        PrintWriter out = new PrintWriter(bw);
+        out.println("BigInteger.java isProbablePrime entry");
+	    // System.out.println("BigInteger.java isProbablePrime entry");
         if (certainty <= 0)
             return true;
         BigInteger w = this.abs();
-        System.out.printf("\nBigInteger.java isProbablePrime: %s\n",this.toString());
-        System.out.printf("\nBigInteger.java isProbablePrime abs: %s\n",w.toString());
-	if (w.equals(TWO))
+        out.printf("\nBigInteger.java isProbablePrime: %s\n",this.toString());
+        // System.out.printf("\nBigInteger.java isProbablePrime: %s\n",this.toString());
+        out.printf("\nBigInteger.java isProbablePrime abs: %s\n",w.toString());
+        // System.out.printf("\nBigInteger.java isProbablePrime abs: %s\n",w.toString());
+
+        out.close();
+        bw.close();
+        myWriter.close();
+
+        if (w.equals(TWO))
             return true;
         if (!w.testBit(0) || w.equals(ONE))
             return false;
