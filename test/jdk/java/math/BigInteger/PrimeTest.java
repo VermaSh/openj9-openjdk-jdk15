@@ -222,17 +222,27 @@ public class PrimeTest {
             2976221, 3021377, 6972593, 13466917, 20996011, 24036583, 25964951,
             30402457, 32582657, 37156667, 42643801, 43112609, 57885161 */
         };
-        System.out.println("Checking first "+MERSENNE_EXPONENTS.length+" Mersenne primes");
+        String printPrefix = "PrimeTest.java::checkMersennePrimes - ";
+        System.out.println("1. " + printPrefix + "Checking first "+MERSENNE_EXPONENTS.length+" Mersenne primes");
 
         boolean result = true;
+        int bitToTest = 0;
         for (int n : MERSENNE_EXPONENTS) {
             BigInteger mp = BigInteger.ONE.shiftLeft(n).subtract(BigInteger.ONE);
-	    System.out.printf("\nBigInteger in PrimeTest.java(n = %d): %s\n",n,mp.toString());
-	    boolean result_mine = mp.isProbablePrime(certainty);
-	    System.out.printf("\nPrimeTest.java::checkMersennePrimes isProbablePrime(certainty): %s\n",Boolean.toString(result_mine));
+
+            System.out.printf("\n2. %sBigInteger in PrimeTest.java(n = %d): %s\n",printPrefix,n,mp.toString());
+	        boolean result_mine = mp.isProbablePrime(certainty);
+            System.out.printf("\n3. %sPrimeTest.java::checkMersennePrimes isProbablePrime(certainty): %s\n",printPrefix,Boolean.toString(result_mine));
+            
+            System.out.printf("\n4. %sDoing in method isProbablePrime check\n",printPrefix);
+            BigInteger wtmp = mp.abs();
+            System.out.printf("\n5. %s isProbablePrime abs: %s\n",printPrefix,wtmp.toString());
+            System.out.printf("\n6. $s get 0th bit of wtmp: \n",printPrefix,(getInt(bitToTest >>> 5) & (1 << (bitToTest & 31))));
+            System.out.printf("\n7. %s BigInteger.ONE: %s\n",printPrefix,BigInteger.ONE.toString());
+
             if (!result_mine) {
             // if (!mp.isProbablePrime(certainty)) {
-                System.err.println("Mp with p = "+n+" not classified as prime");
+                System.err.println("8. " + printPrefix + "Mp with p = "+n+" not classified as prime");
                 result = false;
             }
         }
